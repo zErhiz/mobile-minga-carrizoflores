@@ -67,10 +67,10 @@ const handleSignUpPress = () => {
     </Pressable>
  </LinearGradient>
       <Text style={StylesNew.signUpText}>
-        Don't have an account yet?  <TouchableOpacity onPress={handleSignUpPress } ><Text style={StylesNew.signUpLink} >Sign up</Text></TouchableOpacity>
+        Don't have an account yet?  <Text  onPress={handleSignUpPress} style={StylesNew.signUpLink} >Sign up</Text>
       </Text>
       <Text style={StylesNew.signUpText}>
-        Go back to <TouchableOpacity onPress={handleHomePress } ><Text style={StylesNew.signUpLink} >home page</Text></TouchableOpacity>
+        Go back to <Text onPress={handleHomePress } style={StylesNew.signUpLink} >home page</Text>
       </Text>
    
     </View>
