@@ -40,29 +40,25 @@ export const StylesNew = StyleSheet.create({
   },
   buttonTextSignIn: {
     color: "#FFFF",
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "bold",
     textAlign: "center",
   },
-  linearGradient: {
-    
-    paddingHorizontal: 90,
-    paddingVertical: 10,
-    borderRadius: 20
-  },
+  
   signUpText: {
     color: "black",
     fontSize: 16,
     textAlign: "center",
     fontWeight: "400",
-    borderColor: "orange",
-    borderWidth: 2,
+    
+    fontWeight: "bold"
   },
   signUpLink: {
-    color: "#f472b6",
+    color: "white",
     fontWeight: "bold",
-    borderColor: "orange",
-    borderWidth: 2,
+    
+   
     textAlign: "center",
+
   },
 }); 

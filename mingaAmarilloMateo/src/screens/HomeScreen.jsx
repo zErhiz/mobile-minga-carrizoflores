@@ -37,16 +37,16 @@ const HomeScreen = () => {
           <TouchableOpacity onPress={() => navigation.navigate('Mangas')}>
             <LinearGradient
               colors={['#f9a8d4','#f472b6']}
-              style={StylesNew.linearGradient}
+              style={{borderRadius:50, width:150,height:50, justifyContent:'center',}}
             >
               <Text style={StylesNew.buttonTextSignIn}>Explore </Text>
             </LinearGradient>
           </TouchableOpacity>
         ) : (
-          <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
+          <TouchableOpacity  onPress={() => navigation.navigate('SignIn')}>
             <LinearGradient
               colors={['#f9a8d4','#f472b6']}
-              style={StylesNew.linearGradient}
+              style={{borderRadius:50, width:150,height:50, justifyContent:'center',}}
             >
               <Text style={StylesNew.buttonTextSignIn}>Sign In!</Text>
             </LinearGradient>
