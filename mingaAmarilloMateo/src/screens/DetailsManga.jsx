@@ -1,16 +1,14 @@
 import apiUrl from "../../api";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
-import { View, Text, Button, Image, ScrollView } from "react-native";
+import { View, Text, Button, Image, ScrollView,TouchableOpacity } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { color } from "react-native-reanimated";
+
 
 const DetailsManga = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const mangaId = route.params?.mangaId;
-  const dispatch = useDispatch();
 
   const { id, page } = route.params;
 
@@ -20,7 +18,7 @@ const DetailsManga = () => {
   const [chapters, setChapters] = useState([]);
   const [count, setCount] = useState("");
   const [canpages, setCanpages] = useState([]);
-
+console.log(chapters)
   useEffect(() => {
     axios(`${apiUrl}mangas/${mangaId}`)
       .then((res) => {
@@ -44,7 +42,7 @@ const DetailsManga = () => {
 
   useEffect(() => {
     axios
-      .get(`${apiUrl}chapters?manga_id=${mangaId}&page=${page}&limit=4`)
+      .get(`${apiUrl}chapters?manga_id=${mangaId}`)
       .then((res) => {
         const data = res.data.response;
         setChapters(data);
@@ -71,7 +69,7 @@ const DetailsManga = () => {
           />
           <Text
             style={{
-              fontSize: 24,
+              fontSize: 28,
               textAlign: "center",
               marginTop: 5,
               color: "#222222",
@@ -92,7 +90,7 @@ const DetailsManga = () => {
                 borderRadius: 20,
                 width: "30%",
                 height: "100%",
-                backgroundColor: "#EF8481",
+                backgroundColor: "#f0a7e8",
                 textAlign: "center",
                 lineHeight: 36,
                 color: "white",
@@ -101,7 +99,7 @@ const DetailsManga = () => {
             >
               {mangas.category_id?.name}
             </Text>
-            <Text style={{ fontSize: 24, color: "green" }}>{mangas.author_id?.name}</Text>
+            <Text style={{ fontSize: 24, color: "#cf27c4" }}>{mangas.author_id?.name}</Text>
           </View>
           <View
             style={{
@@ -149,34 +147,61 @@ const DetailsManga = () => {
               <Text style={{ fontWeight: "bold", fontSize: 24 }}>Eng</Text>
               <Text style={{ fontSize: 16 }}>Language</Text>
             </View>
-          </View>
-          <View style={{ marginTop: 8, height: 200, width: "80%" }}>
-            <ScrollView>
-              <Text style={{ fontSize: 18, marginTop: 9 }}>
-                {mangas.description}
-              </Text>
-            </ScrollView>
+            
           </View>
           <View
             style={{
-              marginTop: 5,
+              marginTop: 8,
               flexDirection: "row",
-              justifyContent: "space-around",
+              
               borderRadius: 20,
+              borderWidth: 2,
+              borderColor: "black",
+              width:"80%",
+              height: "5%"
             }}
           >
-            <Button
-              title="Mangas"
-              onPress={() => setShowMangaContent(true)}
-              color={showMangaContent ? "#F97316" : undefined}
-              style={{ width: "50%", borderRadius: 20 }}
-            />
-            <Button
-              title="Chapters"
-              onPress={() => setShowMangaContent(false)}
-              color={!showMangaContent ? "#F97316" : undefined}
-              style={{ width: "50%", borderRadius: 20 }}
-            />
+         <TouchableOpacity
+  onPress={() => setShowMangaContent(true)}
+  style={{
+    width: '50%',
+    borderRadius: 50,
+    justifyContent: "center",
+    shadowColor: '#000',
+    shadowOpacity: 0.5,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 5,
+    elevation: 5,
+    backgroundColor: showMangaContent ? "#F9A8D4" : undefined,
+  }}
+>
+  <Text style={{ textAlign: 'center', color: "white" }}>Manga</Text>
+</TouchableOpacity>
+
+<TouchableOpacity
+  onPress={() => setShowMangaContent(false)}
+  style={{
+    width: '50%',
+    borderRadius: 50,
+    shadowColor: '#000',
+    shadowOpacity: 0.5,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 5,
+    elevation: 5,
+    justifyContent: "center",
+    backgroundColor: !showMangaContent ? undefined : '#EBEBEB',
+  }}
+>
+  <Text style={{ textAlign: 'center' }}>Chapters</Text>
+</TouchableOpacity>
+          </View>
+          <View style={{ marginTop: 8, height: 150, width: "80%" }}>
+            <ScrollView >
+              <Text style={{ fontSize: 18, marginTop: 9, }}>
+                {mangas.description}
+              </Text>
+            </ScrollView>
+          
           </View>
         </View>
       ) : (
@@ -205,23 +230,50 @@ const DetailsManga = () => {
             style={{
               marginTop: 8,
               flexDirection: "row",
-              justifyContent: "space-around",
+              
               borderRadius: 20,
+              borderWidth: 2,
+              borderColor: "black",
+              width:"80%",
+              height: "4%"
             }}
           >
-            <Button
-              title="Mangas"
-              onPress={() => setShowMangaContent(true)}
-              color={showMangaContent ? undefined : "#EBEBEB"}
-              style={{ width: "50%", borderRadius: 20 }}
-            />
-            <Button
-              title="Chapters"
-              onPress={() => setShowMangaContent(false)}
-              color={!showMangaContent ? undefined : "#F97316"}
-              style={{ width: "50%", borderRadius: 20 }}
-            />
+         <TouchableOpacity
+  onPress={() => setShowMangaContent(true)}
+  style={{
+    width: '50%',
+    borderRadius: 50,
+    shadowColor: '#000',
+    shadowOpacity: 0.5,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 5,
+    elevation: 5,
+    justifyContent: "center",
+    backgroundColor: showMangaContent ? "#F9A8D4" : "#EBEBEB",
+  }}
+>
+  <Text style={{ textAlign: 'center', color: "black" }}>Manga</Text>
+</TouchableOpacity>
+
+<TouchableOpacity
+  onPress={() => setShowMangaContent(false)}
+  style={{
+    width: '50%',
+    borderRadius: 50,
+    shadowColor: '#000',
+    shadowOpacity: 0.5,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 5,
+    elevation: 5,
+    justifyContent: "center",
+    backgroundColor: !showMangaContent ? "#F9A8D4" : undefined,
+  }}
+>
+  <Text style={{ textAlign: 'center',  color: "white"  }}>Chapters</Text>
+</TouchableOpacity>
           </View>
+          
+            <ScrollView>
           <View>
             {chapters.map((chapt) => (
               <View
@@ -261,23 +313,24 @@ const DetailsManga = () => {
                 </View>
                 <View style={{ width: "30%" }}>
                   {chapt._id && (
-                    <Button
-                      title="Read"
-                      onPress={() =>
-                        navigation.navigate("Chapter", {
-                          chapterId: chapt._id,
-                          page: 0,
-                        })
-                      }
-                      color="#F97316"
-                      style={{
-                        borderRadius: 20,
-                        height: 80,
-                        width: 100,
-                        fontSize: 20,
-                        color: "white",
-                      }}
-                    />
+                <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate('Chapter', {
+                    chapterId: chapt._id,
+                    page: 0,
+                  })
+                }
+                style={{
+                  borderRadius: 80,
+                  height: "80%",
+                  width: 100,
+                  backgroundColor: '#F472B6',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <Text style={{ fontSize: 20, color: 'white', fontWeight: "bold" }}>Read</Text>
+              </TouchableOpacity>
                   )}
                 </View>
               </View>
@@ -320,7 +373,9 @@ const DetailsManga = () => {
                 )}
               </View>
             )}
+
           </View>
+          </ScrollView>
         </View>
       )}
     </>
