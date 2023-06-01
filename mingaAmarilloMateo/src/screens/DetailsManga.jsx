@@ -3,18 +3,19 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { View, Text, Button, Image, ScrollView,TouchableOpacity } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const DetailsManga = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const mangaId = route.params?.mangaId;
 
-  const { id, page } = route.params;
+
 
   const [mangas, setMangas] = useState([]);
   const [reload, setReload] = useState(false);
-  const [pageChange, setPage] = useState(Number(page));
+  const [pageChange, setPage] = useState(Number(1));
+  console.log(pageChange)
   const [chapters, setChapters] = useState([]);
   const [count, setCount] = useState("");
   const [canpages, setCanpages] = useState([]);
@@ -29,20 +30,20 @@ console.log(chapters)
   const NEXT = () => {
     setPage((prevPage) => prevPage + 1);
     setReload(!reload);
-    navigation.navigate("Manga", { id: id, page: pageChange + 1 });
+   
   };
 
   const PREV = () => {
     if (pageChange > 1) {
       setPage((prevPage) => prevPage - 1);
       setReload(!reload);
-      navigation.navigate("Manga", { id: id, page: pageChange - 1 });
+   
     }
   };
 
   useEffect(() => {
     axios
-      .get(`${apiUrl}chapters?manga_id=${mangaId}`)
+      .get(apiUrl + `chapters?manga_id=${mangaId}&page=${pageChange}&limit=4`)
       .then((res) => {
         const data = res.data.response;
         setChapters(data);
@@ -235,7 +236,7 @@ console.log(chapters)
               borderWidth: 2,
               borderColor: "black",
               width:"80%",
-              height: "4%"
+              height: "4.5%"
             }}
           >
          <TouchableOpacity
@@ -273,25 +274,28 @@ console.log(chapters)
 </TouchableOpacity>
           </View>
           
-            <ScrollView>
-          <View>
+           
+          <View style={{ height: 300, borderWidth: 2, borderColor: 'black', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+              <ScrollView>
             {chapters.map((chapt) => (
-              <View
+                <View
                 style={{
-                  width: "90%",
+                  width: "100%",
                   marginBottom: 20,
-                  height: 80,
+                  height: 100,
                   flexDirection: "row",
-                  justifyContent: "space-evenly",
+                  justifyContent: 'space-between',
                   alignItems: "center",
                   marginTop: 32,
+                  borderWidth: 2,
+                  borderColor: "black"
                 }}
                 key={chapt.title}
               >
                 <Image
                   style={{
-                    height: 64,
-                    width: 80,
+                    height: "100%",
+                    width: "30%",
                     backgroundColor: "gray",
                     borderRadius: 20,
                   }}
@@ -299,17 +303,15 @@ console.log(chapters)
                 />
                 <View style={{ width: "33%", height: 64 }}>
                   <View
-                    style={{ flexDirection: "row", justifyContent: "center" }}
+                    style={{ flexDirection: "column", justifyContent: "center" }}
                   >
-                    <Text style={{ fontSize: 24 }}>{chapt.title}</Text>
-                    <Text>{chapt.order}</Text>
+                    <Text style={{ fontSize: 17 }}>{chapt.title}</Text>
+                    <View style ={{flexDirection:"row", alignItems: "center"}}> 
+                    <Icon name="users" size={17} style={{ marginLeft: 5, color:"pink" }} /> 
+                    <Text style={{ fontSize: 17 }}>169</Text>
+                    </View>
                   </View>
-                  <View
-                    style={{ flexDirection: "row", justifyContent: "center" }}
-                  >
-                    <Text style={{ width: 10 }}>...</Text>
-                    <Text>401</Text>
-                  </View>
+                 
                 </View>
                 <View style={{ width: "30%" }}>
                   {chapt._id && (
@@ -337,45 +339,47 @@ console.log(chapters)
             ))}
             {count >= 5 && (
               <View
-                style={{
-                  marginBottom: 10,
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                }}
-              >
-                {pageChange !== 1 && (
-                  <Button
-                    title="Previous"
-                    onPress={PREV}
-                    color="#F97316"
-                    style={{
-                      width: 100,
-                      height: 40,
-                      backgroundColor: "#F97316",
-                      borderRadius: 20,
-                      color: "white",
-                    }}
-                  />
-                )}
-                {pageChange !== canpages && (
-                  <Button
-                    title="Next"
-                    onPress={NEXT}
-                    color="#F97316"
-                    style={{
-                      width: 100,
-                      height: 40,
-                      backgroundColor: "#F97316",
-                      borderRadius: 20,
-                      color: "white",
-                    }}
-                  />
-                )}
-              </View>
+              style={{
+                marginBottom: 10,
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+              }}
+            >
+              {pageChange !== 1 && (
+                <TouchableOpacity
+                  onPress={PREV}
+                  style={{
+                    width: 100,
+                    height: 40,
+                    backgroundColor: '#f472b6',
+                    borderRadius: 20,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Text style={{ color: 'white', fontWeight: "bold" }}>Previous</Text>
+                </TouchableOpacity>
+              )}
+              {pageChange !== canpages && (
+                <TouchableOpacity
+                  onPress={NEXT}
+                  style={{
+                    width: 100,
+                    height: 40,
+                    backgroundColor: '#f472b6',
+                    borderRadius: 20,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Text style={{ color: 'white',fontWeight: "bold" }}>Next</Text>
+                </TouchableOpacity>
+              )}
+            </View>
             )}
 
+            </ScrollView>
           </View>
-          </ScrollView>
         </View>
       )}
     </>
