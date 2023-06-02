@@ -156,8 +156,7 @@ console.log(chapters)
               flexDirection: "row",
               
               borderRadius: 20,
-              borderWidth: 2,
-              borderColor: "black",
+            
               width:"80%",
               height: "5%"
             }}
@@ -233,8 +232,7 @@ console.log(chapters)
               flexDirection: "row",
               
               borderRadius: 20,
-              borderWidth: 2,
-              borderColor: "black",
+            
               width:"80%",
               height: "4.5%"
             }}
@@ -275,7 +273,7 @@ console.log(chapters)
           </View>
           
            
-          <View style={{ height: 300, borderWidth: 2, borderColor: 'black', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+          <View style={{ height: 300, justifyContent: 'center', alignItems: 'center', width: '100%' }}>
               <ScrollView>
             {chapters.map((chapt) => (
                 <View
@@ -287,8 +285,7 @@ console.log(chapters)
                   justifyContent: 'space-between',
                   alignItems: "center",
                   marginTop: 32,
-                  borderWidth: 2,
-                  borderColor: "black"
+                 
                 }}
                 key={chapt.title}
               >

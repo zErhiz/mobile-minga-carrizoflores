@@ -95,7 +95,7 @@ const Manga = () => {
         </View>
       </ImageBackground>
       {mangas.length > 0 ? ( 
-        <ScrollView style={{ flex: 1, borderColor: "black", borderWidth: 2, }}>
+        <ScrollView style={{ flex: 1,  }}>
           <View style={{ height: 100,flexDirection: "column",  alignItems: "center",}}>
             <Text style={{ fontWeight: "bold", fontSize: 20, }}>Explore</Text>
             <View style={{ height: "80%", width:"70%", flexDirection: "row", gap:13, }}> 

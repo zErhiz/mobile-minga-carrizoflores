@@ -1,6 +1,7 @@
 
 import { NavigationContainer } from "@react-navigation/native";
-import BottomTabsNavigator from "./src/navigation/BottomTabsNavigator";
+import NavigateStack from "./src/navigation/navigate"
+
 import { Provider } from 'react-redux'
 import store from "./store/store"
 
@@ -8,7 +9,8 @@ export default function App() {
   return (
 <Provider store={store}> 
    <NavigationContainer>
-      <BottomTabsNavigator />
+      <NavigateStack />
+
    </NavigationContainer>
 </Provider>
   );

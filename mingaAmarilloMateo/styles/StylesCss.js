@@ -26,8 +26,7 @@ export const StylesNew = StyleSheet.create({
     color: "#FFFFFF",
   },
   viewHome1:{
-    borderColor: "orange",
-    borderWidth: 2,
+    
    alignItems: "center",
    gap: 20,
 

@@ -4,12 +4,12 @@ import { View, Text, Button, Image, TouchableOpacity } from 'react-native';
 const Cards = ({ title, img,color, onPress }) => {
     
   return (
-    <View style={{ width: "100%" ,borderColor: "black", borderWidth: 2, padding: 16 }}>
+    <View style={{ width: "100%" , padding: 16 }}>
       <View style={{ backgroundColor: 'white', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', border: 1, width: "100%", borderRadius: 16, height: 130 }}>
       <View style={{ height: "80%", width: '2%', backgroundColor: color }}></View>
         <View style={{ flex: 1, justifyContent: 'center', paddingLeft: 16, alignItems: "center", }}>
           <Text>{title}</Text>
-          <TouchableOpacity onPress={onPress} style={{backgroundColor: "#cdf9a8", padding: 10, borderRadius: 16,borderColor: "black", borderWidth: 2, width: "40%", alignItems: 'center'}}>
+          <TouchableOpacity onPress={onPress} style={{backgroundColor: "#cdf9a8", padding: 10, borderRadius: 16, width: "40%", alignItems: 'center'}}>
             <Text style={{  fontWeight: 'bold', color: 'green', fontSize: 12 }}>Read</Text>
           </TouchableOpacity>
         </View>

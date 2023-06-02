@@ -46,7 +46,7 @@ const Profile = () => {
             Alert.alert('Goodbye', 'You have been logged out we hope to see you again ;( .', [
               {
                 text: 'OK',
-                onPress: () => navigation.navigate('SignIn'),
+                onPress: () => navigation.navigate('Home'),
               },
             ]);
           },
@@ -64,9 +64,9 @@ const Profile = () => {
     <View style={{justifyContent:"center",gap:20,alignItems:"center",width:"100%"}}>
       {user && (
         <View style={{  width:"90%", height:"50%",alignItems:"center", gap:40}}>
-          {user.photo && (
+          {user.photo ? (
             <Image style={{ width: "35%", height: "50%", borderColor:"black",borderWidth:2 }} source={{ uri: user.photo }} />
-          )}
+          ): <Image style={{ width: "35%", height: "50%", borderColor:"black",borderWidth:2 }} source={{ uri: "https://cdn-icons-png.flaticon.com/512/3135/3135768.png" }} />}
           <Text style={{fontSize:24, color:"white",fontWeight:"bold"}}>{user.email}</Text>
         </View>
       )}
