@@ -102,7 +102,7 @@ const Manga = () => {
   style={{ fontSize: 20, width: "100%", padding: 4, borderRadius: 20, backgroundColor: "white" }}
   leftIcon={<Icon name="search" size={24} color="pink" />}
   defaultValue={titleRef.current}
-  placeholder="Find your manga here"
+  placeholder="Find your manga here."
   onChangeText={(text) => {
       titleRef.current = text;
       captureText();
