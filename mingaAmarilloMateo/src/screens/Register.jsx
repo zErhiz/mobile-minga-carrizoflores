@@ -38,26 +38,26 @@ const Register = () => {
     });
 };
 
-  const selectPhoto = async () => {
-    let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+const selectPhoto = async () => {
+  let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
-    if (permissionResult.granted === false) {
-      Alert.alert('Permission to access camera roll is required!');
-      return;
-    }
+  if (permissionResult.granted === false) {
+    Alert.alert('Permission to access camera roll is required!');
+    return;
+  }
 
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
+  let result = await ImagePicker.launchImageLibraryAsync({
+    mediaTypes: ImagePicker.MediaTypeOptions.All,
+    allowsEditing: true,
+    aspect: [4, 3],
+    quality: 1,
+  });
 
-    if (!result.canceled) {
-      setImage(result.assets[0].uri);
-      setPhoto(result.assets[0].uri);
-    }
-  };
+  if (!result.cancelled) {
+    setPhoto(result.uri);
+    setImage(result.uri);
+  }
+};
 
   return (
     <ImageBackground
