@@ -5,10 +5,25 @@ import { useNavigation, useIsFocused } from '@react-navigation/native';
 import axios from 'axios';
 import apiUrl from '../../api';
 import { StylesNew } from "../../styles/StylesCss";
+import HomeScreen from './HomeScreen';
 
 const Profile = () => {
   const navigation = useNavigation();
+  const [token, setToken] = useState(null);
   const isFocused = useIsFocused();
+
+  const checkToken = async () => {
+    try {
+      const storedToken = await AsyncStorage.getItem('token');
+      setToken(storedToken);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    checkToken();
+  }, [isFocused]);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -56,7 +71,7 @@ const Profile = () => {
       Alert.alert('Error', error.message);
     }
   };
-
+if(token){
   return (
     <ImageBackground
     source={{ uri: 'https://i.pinimg.com/474x/9f/da/67/9fda674a358754b0831ab235f4bf4057.jpg' }}
@@ -65,8 +80,8 @@ const Profile = () => {
       {user && (
         <View style={{  width:"90%", height:"50%",alignItems:"center", gap:40}}>
           {user.photo ? (
-            <Image style={{ width: "35%", height: "50%", borderColor:"black",borderWidth:2 }} source={{ uri: user.photo }} />
-          ): <Image style={{ width: "35%", height: "50%", borderColor:"black",borderWidth:2 }} source={{ uri: "https://cdn-icons-png.flaticon.com/512/3135/3135768.png" }} />}
+            <Image style={{ width: "35%", height: "50%", }} source={{ uri: user.photo }} />
+          ): <Image style={{ width: "35%", height: "50%", }} source={{ uri: "https://cdn-icons-png.flaticon.com/512/3135/3135768.png" }} />}
           <Text style={{fontSize:24, color:"white",fontWeight:"bold"}}>{user.email}</Text>
         </View>
       )}
@@ -76,7 +91,10 @@ const Profile = () => {
       </TouchableOpacity>
     </View>
     </ImageBackground>
-  );
+  );}
+  else{
+    return <HomeScreen/>
+  }
 };
 
 export default Profile;

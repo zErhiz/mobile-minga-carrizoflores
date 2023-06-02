@@ -4,13 +4,29 @@ import axios from "axios";
 import apiUrl from "../../api";
 import Cards from "../components/Cards";
 import { Input } from "react-native-elements";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useIsFocused } from '@react-navigation/native';
 import Icon from "react-native-vector-icons/FontAwesome";
+import HomeScreen from "./HomeScreen";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const Manga = () => {
   const navigation = useNavigation();
   const titleRef = useRef("");
   const categoryRef = useRef([]);
+  const [token, setToken] = useState(null);
+  const isFocused = useIsFocused();
 
+  const checkToken = async () => {
+    try {
+      const storedToken = await AsyncStorage.getItem('token');
+      setToken(storedToken);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    checkToken();
+  }, [isFocused]);
   const [categories, setCategories] = useState([]);
   const [reload, setReload] = useState(false);
   const [page, setPage] = useState(1);
@@ -72,8 +88,9 @@ const Manga = () => {
   const prev = () => {
     if (mangas) setPage(page - 1);
   };
-
+  if (token) {
   return (
+    
     <View style={{ flex: 1, }}>
       <ImageBackground
         source={{ uri: 'https://i.ibb.co/vvXWzcg/pexels-lisa-fotios-1454906-1.png' }}
@@ -181,7 +198,10 @@ const Manga = () => {
         </ImageBackground>
       )}
     </View>
-  );
+  );}
+  else{
+    return <HomeScreen />
+  }
 };
 
 export default Manga;
